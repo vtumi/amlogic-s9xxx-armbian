@@ -51,6 +51,7 @@ on:
           - h88k
           - h88k-v3
           - h96-max-m2
+          - h96-max-v56
           - hs530r
           - hugsun-x99
           - ipc-r
@@ -336,14 +337,14 @@ jobs:
 
           mkdir -p /builder/build
           ln -sf /builder/build ${{ github.workspace }}/build
-          ln -sf /builder/build /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/build
+          ln -sf /builder/build /home/runner/work/_actions/vtumi/amlogic-s9xxx-armbian/h96-max-v56/build
 
           sudo timedatectl set-timezone "${TZ}"
           echo "build_tag=Armbian${set_release}_arm64_${{ inputs.armbian_edition }}_$(date +"%Y.%m")" >> ${GITHUB_ENV}
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Rebuild Armbian
-        uses: ophub/amlogic-s9xxx-armbian@main
+        uses: vtumi/amlogic-s9xxx-armbian@h96-max-v56
         if: ${{ env.ARMBIAN_URL }} != '' && !cancelled()
         with:
           build_target: armbian

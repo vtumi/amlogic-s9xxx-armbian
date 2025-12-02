@@ -57,6 +57,7 @@ on:
           - h88k
           - h88k-v3
           - h96-max-m2
+          - h96-max-v56
           - hs530r
           - hugsun-x99
           - ipc-r
@@ -318,7 +319,7 @@ jobs:
           df -hT ${PWD}
           git clone -q --single-branch --depth=1 --branch=main https://github.com/armbian/build.git build
           ln -sf /builder/build ${{ github.workspace }}/build
-          ln -sf /builder/build /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/build
+          ln -sf /builder/build /home/runner/work/_actions/vtumi/amlogic-s9xxx-armbian/h96-max-v56/build
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Compile Armbian [ ${{ inputs.set_release }} ]
@@ -361,7 +362,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Rebuild Armbian
-        uses: ophub/amlogic-s9xxx-armbian@main
+        uses: vtumi/amlogic-s9xxx-armbian@h96-max-v56
         if: ${{ steps.clean.outputs.status }} == 'success' && !cancelled()
         with:
           build_target: armbian
